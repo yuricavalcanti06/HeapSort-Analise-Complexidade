@@ -3,36 +3,31 @@
 #include <algorithm>
 #include <chrono>
 
-/**
- * @brief Restaura a propriedade do Max-Heap na subárvore com raiz em 'i'.
- * @param arr O vetor (representando o heap).
- * @param n O tamanho do heap.
- * @param i O índice da raiz da subárvore.
- */
 void heapify(std::vector<int>& arr, int n, int i) {
     int largest = i;
-    int l = 2 * i + 1;
-    int r = 2 * i + 2;
+    
+    while (true) {
+        int l = 2 * i + 1;
+        int r = 2 * i + 2;
 
-    if (l < n && arr[l] > arr[largest]) {
-        largest = l;
-    }
+        if (l < n && arr[l] > arr[largest]) {
+            largest = l;
+        }
 
-    if (r < n && arr[r] > arr[largest]) {
-        largest = r;
-    }
+        if (r < n && arr[r] > arr[largest]) {
+            largest = r;
+        }
 
-    if (largest != i) {
-        std::swap(arr[i], arr[largest]);
-        
-        heapify(arr, n, largest);
+        if (largest != i) {
+            std::swap(arr[i], arr[largest]);
+            
+            i = largest;
+        } else {
+            break;
+        }
     }
 }
 
-/**
- * @brief Função principal para ordenar um vetor usando Heap Sort.
- * @param arr O vetor a ser ordenado.
- */
 void heapSort(std::vector<int>& arr) {
     int n = arr.size();
 
@@ -48,7 +43,9 @@ void heapSort(std::vector<int>& arr) {
 }
 
 int main() {
-    
+    std::ios_base::sync_with_stdio(false);
+    std::cin.tie(NULL);
+
     std::vector<int> arr;
     int num;
     while (std::cin >> num) {
